@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/core/theme.dart';
+import 'package:lms_app/screens/auth/login_page.dart';
 import 'package:lms_app/screens/splash_screen.dart';
 
 void main() {
