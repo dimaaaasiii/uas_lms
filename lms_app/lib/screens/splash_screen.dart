@@ -34,17 +34,14 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'LMS App',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+            // Logo Image Only
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Image.asset(
+                'assets/images/logo_splash.png',
+                fit: BoxFit.contain,
+                width: 250, // Slightly larger for impact
               ),
-            ),
-            SizedBox(height: 20),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ],
         ),
