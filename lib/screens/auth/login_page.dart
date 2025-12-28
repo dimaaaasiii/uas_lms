@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/theme.dart';
+import '../dashboard_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,13 +10,81 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Bottom Sheet Logic
+  // Bottom Sheet Logic - Single Language (Indonesian)
   void _showHelpBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => const HelpBottomSheet(),
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.6,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            // Handle Bar
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 20),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            
+            // Title
+            const Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Text(
+                'Bantuan Masuk',
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            const Divider(height: 1, color: Colors.grey),
+
+            // Content
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                     Text(
+                      'Panduan Login',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    SizedBox(height: 12),
+                    Text('1. Gunakan akun SSO Microsoft Office 365 Anda (email kampus).'),
+                    SizedBox(height: 8),
+                    Text('2. Format: nama@student.telkomuniversity.ac.id'),
+                    SizedBox(height: 8),
+                    Text('3. Jika lupa kata sandi, silakan reset melalui layanan iGracias.'),
+                    SizedBox(height: 24),
+                    Text(
+                      'Masih Terkendala?',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    SizedBox(height: 12),
+                    Text('Tim Helpdesk kami siap membantu:'),
+                    SizedBox(height: 4),
+                    Text('• Email: helpdesk@telkomuniversity.ac.id'),
+                    Text('• WhatsApp: +62 812 3456 7890'),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -25,6 +94,9 @@ class _LoginPageState extends State<LoginPage> {
     final double screenHeight = MediaQuery.of(context).size.height;
     // Modern Header height: ± 30%
     final double headerHeight = screenHeight * 0.30; 
+    // Logo size
+    const double logoSize = 100.0;
+    const double logoTopOverlap = logoSize / 2;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,9 +112,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
-                      // 1. MODERN HEADER (Gradient + Abstract Shapes + Floating Logo)
+                      // 1. MODERN HEADER
                       SizedBox(
-                        height: headerHeight + 50, // Added space for logo overlap
+                        height: headerHeight + logoTopOverlap,
                         child: Stack(
                           clipBehavior: Clip.none,
                           children: [
@@ -67,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   child: Stack(
                                     children: [
-                                      // Abstract Shapes (Soft Circles)
+                                      // Abstract Shapes
                                       Positioned(
                                         top: -50,
                                         left: -50,
@@ -90,15 +162,15 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             
-                            // Floating Logo (Centered & Overlapping)
+                            // Floating Logo
                             Positioned(
                               bottom: 0,
                               left: 0,
                               right: 0,
                               child: Center(
                                 child: Container(
-                                  width: 90,
-                                  height: 90,
+                                  width: logoSize,
+                                  height: logoSize,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     shape: BoxShape.circle,
@@ -111,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ],
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(18.0),
+                                    padding: const EdgeInsets.all(20.0),
                                     child: Image.asset(
                                       'assets/images/logo.png',
                                       fit: BoxFit.contain,
@@ -128,31 +200,36 @@ class _LoginPageState extends State<LoginPage> {
             
                       // 2. FORM SECTION
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 32.0, 
-                          right: 32.0, 
-                          top: 16.0, 
-                          bottom: 0
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Judul 'Login'
+                            // Greeting / Title
                             const Text(
                               'Login',
                               style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 28,
                                 fontWeight: FontWeight.w800,
                                 color: Color(0xFFB71C1C),
                                 letterSpacing: 0.5,
                               ),
                             ),
-                            const SizedBox(height: 30),
+                             Text(
+                              'Silakan login menggunakan akun email Anda.',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[600],
+                                height: 1.5,
+                              ),
+                            ),
+                            const SizedBox(height: 32),
             
                             // Email Input
                             const TextField(
                               decoration: InputDecoration(
-                                labelText: 'Email 365',
+                                labelText: 'Email',
+                                hintText: 'nama@student.telkomuniversity.ac.id',
+                                hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
                                 labelStyle: TextStyle(color: Colors.grey),
                                 contentPadding: EdgeInsets.only(bottom: 8),
                                 isDense: true,
@@ -170,7 +247,7 @@ class _LoginPageState extends State<LoginPage> {
                             const TextField(
                               obscureText: true,
                               decoration: InputDecoration(
-                                labelText: 'Password',
+                                labelText: 'Kata Sandi',
                                 labelStyle: TextStyle(color: Colors.grey),
                                 suffixIcon: Icon(Icons.visibility_off, color: Colors.grey, size: 20),
                                 contentPadding: EdgeInsets.only(bottom: 8),
@@ -183,44 +260,51 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 40),
+                            const SizedBox(height: 48),
             
                             // Button Login
                             SizedBox(
                               width: double.infinity,
-                              height: 50,
+                              height: 54, // Slightly taller for touch target
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  // Navigate to Dashboard
+                                  Navigator.pushReplacement(
+                                    context, 
+                                    MaterialPageRoute(builder: (context) => const DashboardPage()),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppTheme.primaryColor,
+                                  foregroundColor: Colors.white,
                                   shadowColor: AppTheme.primaryColor.withOpacity(0.4),
+                                  elevation: 8,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  elevation: 5,
                                 ),
                                 child: const Text(
-                                  'Log In',
+                                  'Login',
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 18, // Bigger text
                                     fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 24),
             
-                            // Bantuan Text
+                            // Help Text
                             Center(
-                              child: GestureDetector(
-                                onTap: _showHelpBottomSheet,
+                              child: TextButton( // Changed to TextButton for better interaction
+                                onPressed: _showHelpBottomSheet,
                                 child: const Text(
-                                  'Bantuan ?',
+                                  'Butuh bantuan?',
                                   style: TextStyle(
                                     color: AppTheme.primaryColor,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
@@ -339,184 +423,4 @@ class FooterWaveClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-
-// Widget Bottom Sheet
-class HelpBottomSheet extends StatefulWidget {
-  const HelpBottomSheet({super.key});
-
-  @override
-  State<HelpBottomSheet> createState() => _HelpBottomSheetState();
-}
-
-class _HelpBottomSheetState extends State<HelpBottomSheet> {
-  int _selectedIndex = 0; // 0 = ID, 1 = EN
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.75,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: Column(
-        children: [
-          // Indikator Strip
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 20),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ),
-
-          // Judul Bantuan
-          const Padding(
-            padding: EdgeInsets.only(bottom: 20.0),
-            child: Text(
-              'Bantuan',
-              style: TextStyle(
-                fontSize: 20, 
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-
-          // Tabs (ID / EN)
-          Row(
-            children: [
-              _buildTab('ID', '🇮🇩', 0),
-              _buildTab('EN', '🇬🇧', 1),
-            ],
-          ),
-          const Divider(height: 1, color: Colors.grey),
-
-          // Konten
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: _selectedIndex == 0 ? _contentID() : _contentEN(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTab(String label, String flag, int index) {
-    bool isActive = _selectedIndex == index;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        child: Container(
-          color: Colors.transparent, // Hit area
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Flag Icon (Using Text Emoji for now as asset not provided for specific flags)
-              Text(
-                flag, 
-                style: const TextStyle(fontSize: 28),
-              ),
-              const SizedBox(height: 8),
-              // Label (ID/EN)
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: isActive ? Colors.black : Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Indicator
-              Container(
-                height: 3,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: isActive ? AppTheme.primaryColor : Colors.transparent,
-                  borderRadius: BorderRadius.circular(1.5),
-                ),
-              ),
-              // Divider line at bottom of tab header
-              Container(
-                height: 1,
-                color: Colors.grey.shade300,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  FontWeight fontWeight(bool isActive) => isActive ? FontWeight.bold : FontWeight.normal;
-
-  Widget _contentID() {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Informasi Login',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        SizedBox(height: 12),
-        Text('1. Akses ini hanya diperuntukkan bagi Dosen dan Mahasiswa Telkom University.'),
-        SizedBox(height: 8),
-        Text('2. Silakan login menggunakan akun Microsoft Office 365 Anda (SSO).'),
-        SizedBox(height: 8),
-        Text('3. Format username: username@student.telkomuniversity.ac.id'),
-        SizedBox(height: 8),
-        Text('4. Jika gagal login, pastikan password Anda benar atau reset password melalui layanan iGracias.'),
-        SizedBox(height: 24),
-        Text(
-          'Butuh Bantuan?',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        SizedBox(height: 12),
-        Text('Hubungi Helpdesk melalui:'),
-        Text('• Email: helpdesk@telkomuniversity.ac.id'),
-        Text('• WhatsApp: +62 812 3456 7890'),
-      ],
-    );
-  }
-
-  Widget _contentEN() {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Login Information',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        SizedBox(height: 12),
-        Text('1. This access is restricted to Lecturers and Students of Telkom University.'),
-        SizedBox(height: 8),
-        Text('2. Please login using your Microsoft Office 365 account (SSO).'),
-        SizedBox(height: 8),
-        Text('3. Username format: username@student.telkomuniversity.ac.id'),
-        SizedBox(height: 8),
-        Text('4. If login fails, please ensure your password is correct or reset it via iGracias.'),
-        SizedBox(height: 24),
-        Text(
-          'Need Help?',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        SizedBox(height: 12),
-        Text('Contact Helpdesk via:'),
-        Text('• Email: helpdesk@telkomuniversity.ac.id'),
-        Text('• WhatsApp: +62 812 3456 7890'),
-      ],
-    );
-  }
 }

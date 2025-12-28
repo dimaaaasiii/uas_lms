@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/theme.dart';
+import '../dashboard_screen.dart';
+import 'widgets/language_selector_sheet.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => const HelpBottomSheet(),
+      builder: (context) => const LanguageSelectorSheet(),
     );
   }
 
@@ -188,23 +190,30 @@ class _LoginPageState extends State<LoginPage> {
                             // Button Login
                             SizedBox(
                               width: double.infinity,
-                              height: 50,
+                              height: 54, // Slightly taller for touch target
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  // Navigate to Dashboard
+                                  Navigator.pushReplacement(
+                                    context, 
+                                    MaterialPageRoute(builder: (context) => const DashboardPage()),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppTheme.primaryColor,
+                                  foregroundColor: Colors.white,
                                   shadowColor: AppTheme.primaryColor.withOpacity(0.4),
+                                  elevation: 8,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  elevation: 5,
                                 ),
                                 child: const Text(
-                                  'Log In',
+                                  'Masuk',
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 18, // Bigger text
                                     fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
                                   ),
                                 ),
                               ),
