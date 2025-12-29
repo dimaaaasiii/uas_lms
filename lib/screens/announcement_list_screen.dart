@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
 import 'announcement_detail_screen.dart';
 
@@ -75,12 +76,12 @@ class _AnnouncementListScreenState extends State<AnnouncementListScreen> {
           Navigator.pop(context);
         },
       ),
-      title: const Text(
+      title: Text(
         'Pengumuman',
-        style: TextStyle(
+        style: GoogleFonts.outfit(
           color: Colors.black,
           fontWeight: FontWeight.bold,
-          fontSize: 18,
+          fontSize: 20,
         ),
       ),
     );
@@ -118,7 +119,7 @@ class _AnnouncementListScreenState extends State<AnnouncementListScreen> {
                 // Judul Pengumuman
                 Text(
                   announcement['title']!,
-                  style: const TextStyle(
+                  style: GoogleFonts.outfit(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
@@ -129,7 +130,7 @@ class _AnnouncementListScreenState extends State<AnnouncementListScreen> {
                 // Deskripsi
                 Text(
                   announcement['description']!,
-                  style: const TextStyle(
+                  style: GoogleFonts.outfit(
                     fontSize: 12,
                     color: Colors.grey,
                   ),
@@ -157,11 +158,11 @@ class _AnnouncementListScreenState extends State<AnnouncementListScreen> {
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white70,
-          selectedLabelStyle: const TextStyle(
+          selectedLabelStyle: GoogleFonts.outfit(
             fontWeight: FontWeight.w600,
             fontSize: 12,
           ),
-          unselectedLabelStyle: const TextStyle(
+          unselectedLabelStyle: GoogleFonts.outfit(
             fontWeight: FontWeight.normal,
             fontSize: 12,
           ),
@@ -185,7 +186,7 @@ class _AnnouncementListScreenState extends State<AnnouncementListScreen> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 4),
-                child: Icon(Icons.school, size: 26),
+                child: Icon(Icons.class_, size: 26),
               ),
               label: 'Kelas Saya',
             ),

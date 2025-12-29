@@ -62,6 +62,11 @@ flutter:
     - assets/images/logo.png
     - assets/images/logo_splash.png
     - assets/images/splash_logo.png
+    - assets/images/maintenance.png
+    - assets/images/class_uiux.png
+    - assets/images/class_pancasila.png
+    - assets/images/class_code.png
+    - assets/images/user_avatar_default.png
     - assets/loguUAS-removebg-preview.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

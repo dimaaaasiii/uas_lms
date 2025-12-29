@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
 import 'dashboard_screen.dart';
 import 'profile_screen.dart';
-import 'profile_kelas_screen.dart';
+import 'class_screen.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   const ProfileEditScreen({super.key});
@@ -86,22 +87,25 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   height: 110,
                                   padding: const EdgeInsets.all(4),
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFF8B1010), // Darker red
+                                    color: AppTheme.primaryColor, // Darker red
                                     shape: BoxShape.circle,
                                   ),
                                   child: ClipOval(
-                                    child: Container(
-                                      color: const Color(0xFF8B1010),
-                                      child: const Icon(Icons.person, size: 60, color: Colors.white),
+                                    child: Image.asset(
+                                      'assets/images/user_avatar_default.png', 
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return const Icon(Icons.person, size: 60, color: Colors.white);
+                                      },
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 16),
                                 
                                 // User Name
-                                const Text(
+                                Text(
                                   'DIMAS WAHYU ROMADHONI',
-                                  style: TextStyle(
+                                  style: GoogleFonts.outfit(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -144,7 +148,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               _buildTabItem('Kelas', isActive: false, onTap: () {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ProfileKelasScreen()),
+                                  MaterialPageRoute(builder: (context) => const ClassScreen()),
                                 );
                               }),
                               _buildTabItem('Edit Profile', isActive: true, onTap: () {}),
@@ -189,15 +193,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               onTap: () {
                                 // Handle save
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Profil berhasil disimpan!')),
+                                  SnackBar(
+                                    content: Text('Profil berhasil disimpan!', style: GoogleFonts.outfit()),
+                                    backgroundColor: AppTheme.primaryColor,
+                                  ),
                                 );
                               },
                               borderRadius: BorderRadius.circular(8),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                                 child: Text(
                                   'Simpan',
-                                  style: TextStyle(
+                                  style: GoogleFonts.outfit(
                                     color: Colors.black87,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -234,7 +241,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: isActive ? Colors.black87 : Colors.grey,
               fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
               fontSize: 14,
@@ -259,7 +266,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: GoogleFonts.outfit(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
@@ -269,6 +276,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         TextField(
           controller: controller,
           maxLines: maxLines,
+          style: GoogleFonts.outfit(color: Colors.black87),
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             border: OutlineInputBorder(
@@ -304,6 +312,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.outfit(),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           setState(() {

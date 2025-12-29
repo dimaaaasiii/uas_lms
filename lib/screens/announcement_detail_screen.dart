@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
 
 class AnnouncementDetailScreen extends StatefulWidget {
@@ -25,11 +26,11 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Judul Pengumuman
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                   child: Text(
                     'Maintenance Pra UAS Semester Genap 2020/2021',
-                    style: TextStyle(
+                    style: GoogleFonts.outfit(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -46,21 +47,21 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
                       // Avatar placeholder
                       CircleAvatar(
                         radius: 16,
-                        backgroundColor: Colors.grey[300],
+                        backgroundColor: Colors.grey[200],
                         child: Icon(
                           Icons.person,
-                          size: 18,
-                          color: Colors.grey[600],
+                          size: 20,
+                          color: Colors.grey[400],
                         ),
                       ),
                       const SizedBox(width: 12),
                       // Teks Author & Tanggal
-                      const Expanded(
+                      Expanded(
                         child: Text(
                           'By Admin CeLOE – Rabu, 2 Juni 2021, 10:45',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             fontSize: 12,
-                            color: Colors.grey,
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
@@ -70,92 +71,45 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
 
                 // Gambar Ilustrasi
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                     child: Container(
                       width: double.infinity,
-                      height: 180,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF5F5F5),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Background illustration placeholder
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Server/Maintenance Icon
-                              Container(
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  color: Colors.orange[100],
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.engineering,
-                                  size: 48,
-                                  color: Colors.orange[700],
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  _buildServerIcon(),
-                                  const SizedBox(width: 8),
-                                  _buildServerIcon(),
-                                  const SizedBox(width: 8),
-                                  _buildServerIcon(),
-                                ],
-                              ),
-                            ],
-                          ),
-                          // Warning sign
-                          Positioned(
-                            top: 16,
-                            right: 24,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.yellow[600],
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.warning, size: 16, color: Colors.black87),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    'Maintenance',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),
+                      child: Image.asset(
+                        'assets/images/maintenance.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                             height: 200,
+                             color: Colors.grey[100],
+                             child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey)),
+                        ),
+                      ),
+                     
                     ),
                   ),
                 ),
 
                 // Sub Judul Konten
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
                   child: Center(
                     child: Text(
                       'Maintenance LMS',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      style: GoogleFonts.outfit(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
                         color: Colors.black,
                       ),
                     ),
@@ -163,60 +117,58 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
                 ),
 
                 // Isi Pengumuman
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(24, 20, 24, 24),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Diinformasikan kepada seluruh pengguna LMS, kami dari tim CeLOE akan melakukan maintenance pada tanggal 12 Juni 2021, untuk meningkatkan layanan server dalam menghadapi ujian akhir semester (UAS).',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF333333),
+                        style: GoogleFonts.outfit(
+                          fontSize: 15,
+                          color: const Color(0xFF424242),
                           height: 1.6,
                         ),
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.justify,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
                         'Dengan adanya kegiatan maintenance tersebut maka situs LMS (lms.telkomuniversity.ac.id) tidak dapat diakses mulai pukul 00.00 s/d 06.00 WIB.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF333333),
+                        style: GoogleFonts.outfit(
+                          fontSize: 15,
+                          color: const Color(0xFF424242),
                           height: 1.6,
                         ),
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.justify,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
                         'Demikian informasi ini kami sampaikan, mohon maaf atas ketidaknyamanannya.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF333333),
+                        style: GoogleFonts.outfit(
+                          fontSize: 15,
+                          color: const Color(0xFF424242),
                           height: 1.6,
                         ),
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.justify,
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 32),
                       Text(
                         'Hormat Kami,',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF333333),
+                        style: GoogleFonts.outfit(
+                          fontSize: 15,
+                          color: const Color(0xFF424242),
                           height: 1.6,
                         ),
-                        textAlign: TextAlign.left,
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'CeLOE Telkom University',
-                        style: TextStyle(
-                          fontSize: 14,
+                        style: GoogleFonts.outfit(
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF333333),
+                          color: const Color(0xFF424242),
                           height: 1.6,
                         ),
-                        textAlign: TextAlign.left,
                       ),
                     ],
                   ),
@@ -252,9 +204,9 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
           Navigator.pop(context);
         },
       ),
-      title: const Text(
+      title: Text(
         'Pengumuman',
-        style: TextStyle(
+        style: GoogleFonts.outfit(
           color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 18,
@@ -319,6 +271,8 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.outfit(),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           setState(() {

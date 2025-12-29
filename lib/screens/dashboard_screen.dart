@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
 import 'profile_screen.dart';
 import 'notification_screen.dart';
 import 'announcement_detail_screen.dart';
 import 'announcement_list_screen.dart';
+import 'class_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -60,7 +62,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 MaterialPageRoute(builder: (context) => const AnnouncementListScreen()),
                               );
                             },
-                            child: const Text('Lihat Semua', style: TextStyle(color: Colors.blue)),
+                            child: Text('Lihat Semua', style: GoogleFonts.outfit(color: Colors.blue)),
                           ),
                         ],
                       ),
@@ -126,15 +128,15 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min, // Wrap content height
-                children: const [
-                  Text(
+                children: [
+                   Text(
                     'Hallo,',
-                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                    style: GoogleFonts.outfit(color: Colors.white70, fontSize: 16),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     'Dimas',
-                    style: TextStyle(
+                    style: GoogleFonts.outfit(
                       color: Colors.white, 
                       fontSize: 18, 
                       fontWeight: FontWeight.bold,
@@ -161,17 +163,17 @@ class _DashboardPageState extends State<DashboardPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
-                children: const [
+                children: [
                   Text(
                     'MAHASISWA',
-                    style: TextStyle(
+                    style: GoogleFonts.outfit(
                       color: Colors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Icon(Icons.person, color: Colors.white, size: 16),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.person, color: Colors.white, size: 16),
                 ],
               ),
             ),
@@ -186,7 +188,7 @@ class _DashboardPageState extends State<DashboardPage> {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: const TextStyle(
+        style: GoogleFonts.outfit(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: Colors.black87,
@@ -216,17 +218,17 @@ class _DashboardPageState extends State<DashboardPage> {
           Text(
             'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: Colors.white.withOpacity(0.9),
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'Tugas 01 - UID Android Mobile Game',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -238,12 +240,12 @@ class _DashboardPageState extends State<DashboardPage> {
           const SizedBox(height: 16),
           Text(
             'Waktu Pengumpulan',
-            style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 12),
+            style: GoogleFonts.outfit(color: Colors.white.withOpacity(0.7), fontSize: 12),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             'Jumat 26 Februari, 23:59 WIB',
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -280,22 +282,28 @@ class _DashboardPageState extends State<DashboardPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Illustration Placeholder
-            Container(
-              height: 120,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Color(0xFFEEEEEE),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
-              child: Center(
-                child: Icon(Icons.campaign, size: 48, color: Colors.grey[400]),
+            ClipRRect(
+               borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.asset(
+                'assets/images/maintenance.png',
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                 errorBuilder: (context, error, stackTrace) => Container(
+                  height: 120,
+                  width: double.infinity,
+                  color: const Color(0xFFEEEEEE),
+                   child: Center(
+                    child: Icon(Icons.campaign, size: 48, color: Colors.grey[400]),
+                  ),
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: const Text(
+              child: Text(
                 'Maintenance Pra UAS Semester Genap 2020/2021',
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   fontSize: 14,
                   color: Colors.black87,
                   height: 1.4,
@@ -351,14 +359,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
+                      children: [
+                         Text(
                           '2021/2',
-                          style: TextStyle(fontSize: 10, color: Colors.grey),
+                          style: GoogleFonts.outfit(fontSize: 10, color: Colors.grey),
                         ),
-                        Text(
+                         Text(
                           '89% Selesai',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             fontSize: 10, 
                             color: AppTheme.primaryColor,
                             fontWeight: FontWeight.bold,
@@ -367,9 +375,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    const Text(
+                    Text(
                       'PEMROGRAMAN BERORIENTASI OBJEK',
-                      style: TextStyle(
+                      style: GoogleFonts.outfit(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
@@ -377,9 +385,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
+                    Text(
                       'CSI322 • Dosen Pengampu',
-                      style: TextStyle(fontSize: 10, color: Colors.grey),
+                      style: GoogleFonts.outfit(fontSize: 10, color: Colors.grey),
                     ),
                     const SizedBox(height: 8),
                     ClipRRect(
@@ -414,9 +422,17 @@ class _DashboardPageState extends State<DashboardPage> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.outfit(),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
-          if (index == 2) {
+          if (index == 1) {
+            // Navigate to Kelas Saya
+             Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ClassScreen()),
+            );
+          } else if (index == 2) {
             // Navigate to Notifikasi
             Navigator.push(
               context,

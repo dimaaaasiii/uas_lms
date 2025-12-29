@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme.dart';
 import '../dashboard_screen.dart';
 
@@ -38,11 +39,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             
             // Title
-            const Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
               child: Text(
                 'Bantuan Masuk',
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   fontSize: 20, 
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -57,27 +58,27 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                      Text(
                       'Panduan Login',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    SizedBox(height: 12),
-                    Text('1. Gunakan akun SSO Microsoft Office 365 Anda (email kampus).'),
-                    SizedBox(height: 8),
-                    Text('2. Format: nama@student.telkomuniversity.ac.id'),
-                    SizedBox(height: 8),
-                    Text('3. Jika lupa kata sandi, silakan reset melalui layanan iGracias.'),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 12),
+                    Text('1. Gunakan akun SSO Microsoft Office 365 Anda (email kampus).', style: GoogleFonts.outfit()),
+                    const SizedBox(height: 8),
+                    Text('2. Format: nama@student.telkomuniversity.ac.id', style: GoogleFonts.outfit()),
+                    const SizedBox(height: 8),
+                    Text('3. Jika lupa kata sandi, silakan reset melalui layanan iGracias.', style: GoogleFonts.outfit()),
+                    const SizedBox(height: 24),
                     Text(
                       'Masih Terkendala?',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    SizedBox(height: 12),
-                    Text('Tim Helpdesk kami siap membantu:'),
-                    SizedBox(height: 4),
-                    Text('• Email: helpdesk@telkomuniversity.ac.id'),
-                    Text('• WhatsApp: +62 812 3456 7890'),
+                    const SizedBox(height: 12),
+                    Text('Tim Helpdesk kami siap membantu:', style: GoogleFonts.outfit()),
+                    const SizedBox(height: 4),
+                    Text('• Email: helpdesk@telkomuniversity.ac.id', style: GoogleFonts.outfit()),
+                    Text('• WhatsApp: +62 812 3456 7890', style: GoogleFonts.outfit()),
                   ],
                 ),
               ),
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                                   decoration: const BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
-                                        Color(0xFFB71C1C), // Deep Red
+                                        AppTheme.primaryColor, // Deep Red
                                         Color(0xFFE53935), // Lighter Red
                                       ],
                                       begin: Alignment.topCenter,
@@ -205,18 +206,18 @@ class _LoginPageState extends State<LoginPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // Greeting / Title
-                            const Text(
+                            Text(
                               'Login',
-                              style: TextStyle(
+                              style: GoogleFonts.outfit(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w800,
-                                color: Color(0xFFB71C1C),
+                                color: const Color(0xFFB71C1C),
                                 letterSpacing: 0.5,
                               ),
                             ),
                              Text(
                               'Silakan login menggunakan akun email Anda.',
-                              style: TextStyle(
+                              style: GoogleFonts.outfit(
                                 fontSize: 14,
                                 color: Colors.grey[600],
                                 height: 1.5,
@@ -225,40 +226,42 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(height: 32),
             
                             // Email Input
-                            const TextField(
+                            TextField(
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 hintText: 'nama@student.telkomuniversity.ac.id',
-                                hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
-                                labelStyle: TextStyle(color: Colors.grey),
-                                contentPadding: EdgeInsets.only(bottom: 8),
+                                hintStyle: GoogleFonts.outfit(fontSize: 12, color: Colors.grey),
+                                labelStyle: GoogleFonts.outfit(color: Colors.grey),
+                                contentPadding: const EdgeInsets.only(bottom: 8),
                                 isDense: true,
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey),
                                 ),
-                                focusedBorder: UnderlineInputBorder(
+                                focusedBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(color: AppTheme.primaryColor, width: 2),
                                 ),
                               ),
+                              style: GoogleFonts.outfit(),
                             ),
                             const SizedBox(height: 24),
             
                             // Password Input
-                            const TextField(
+                            TextField(
                               obscureText: true,
                               decoration: InputDecoration(
                                 labelText: 'Kata Sandi',
-                                labelStyle: TextStyle(color: Colors.grey),
-                                suffixIcon: Icon(Icons.visibility_off, color: Colors.grey, size: 20),
-                                contentPadding: EdgeInsets.only(bottom: 8),
+                                labelStyle: GoogleFonts.outfit(color: Colors.grey),
+                                suffixIcon: const Icon(Icons.visibility_off, color: Colors.grey, size: 20),
+                                contentPadding: const EdgeInsets.only(bottom: 8),
                                 isDense: true,
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey),
                                 ),
-                                focusedBorder: UnderlineInputBorder(
+                                focusedBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(color: AppTheme.primaryColor, width: 2),
                                 ),
                               ),
+                              style: GoogleFonts.outfit(),
                             ),
                             const SizedBox(height: 48),
             
@@ -283,9 +286,9 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'Login',
-                                  style: TextStyle(
+                                  style: GoogleFonts.outfit(
                                     fontSize: 18, // Bigger text
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 1,
@@ -299,9 +302,9 @@ class _LoginPageState extends State<LoginPage> {
                             Center(
                               child: TextButton( // Changed to TextButton for better interaction
                                 onPressed: _showHelpBottomSheet,
-                                child: const Text(
+                                child: Text(
                                   'Butuh bantuan?',
-                                  style: TextStyle(
+                                  style: GoogleFonts.outfit(
                                     color: AppTheme.primaryColor,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
+import 'dashboard_screen.dart';
+import 'class_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -94,12 +97,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
           Navigator.pop(context);
         },
       ),
-      title: const Text(
+      title: Text(
         'Notifikasi',
-        style: TextStyle(
+        style: GoogleFonts.outfit(
           color: Colors.black,
           fontWeight: FontWeight.bold,
-          fontSize: 18,
+          fontSize: 20,
         ),
       ),
     );
@@ -125,7 +128,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               // Judul Notifikasi
               Text(
                 notification['title'] as String,
-                style: const TextStyle(
+                style: GoogleFonts.outfit(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
@@ -138,7 +141,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               // Waktu Notifikasi
               Text(
                 notification['time'] as String,
-                style: const TextStyle(
+                style: GoogleFonts.outfit(
                   fontSize: 12,
                   color: Colors.grey,
                 ),
@@ -163,12 +166,22 @@ class _NotificationScreenState extends State<NotificationScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.outfit(),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
-          setState(() {
-            _bottomNavIndex = index;
-          });
+          if (index == 0) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const DashboardPage()),
+              (route) => false,
+            );
+          } else if (index == 1) {
+             Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ClassScreen()),
+            );
+          }
         },
         items: const [
           BottomNavigationBarItem(

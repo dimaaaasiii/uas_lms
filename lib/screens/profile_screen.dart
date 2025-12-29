@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
 import 'dashboard_screen.dart';
-import 'profile_kelas_screen.dart';
+import 'class_screen.dart';
 import 'profile_edit_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -69,8 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width: 110,
                                   height: 110,
                                   padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF8B1010), // Darker red
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF8B1010), // Darker red
                                     shape: BoxShape.circle,
                                   ),
                                   child: ClipOval(
@@ -86,9 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const SizedBox(height: 16),
                                 
                                 // User Name
-                                const Text(
+                                Text(
                                   'DIMAS WAHYU ROMADHONI',
-                                  style: TextStyle(
+                                  style: GoogleFonts.outfit(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -126,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               _buildTabItem('Kelas', isActive: false, onTap: () {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ProfileKelasScreen()),
+                                  MaterialPageRoute(builder: (context) => const ClassScreen()),
                                 );
                               }),
                               _buildTabItem('Edit Profile', isActive: false, onTap: () {
@@ -154,9 +155,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           'Informasi User',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -184,9 +185,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           'Aktivitas Login',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -232,12 +233,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.logout, color: Colors.white, size: 20),
-                        SizedBox(width: 8),
+                      children: [
+                        const Icon(Icons.logout, color: Colors.white, size: 20),
+                        const SizedBox(width: 8),
                         Text(
                           'Log Out',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -270,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: isActive ? Colors.black87 : Colors.grey,
               fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
               fontSize: 14,
@@ -295,7 +296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: GoogleFonts.outfit(
             color: Colors.grey,
             fontSize: 12,
           ),
@@ -303,7 +304,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
+          style: GoogleFonts.outfit(
             color: Colors.black87,
             fontSize: 14,
             fontWeight: FontWeight.w500,
@@ -319,7 +320,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: GoogleFonts.outfit(
             color: Colors.black87, // Slightly darker than label for structure
             fontSize: 14,
             fontWeight: FontWeight.w500,
@@ -328,7 +329,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
+          style: GoogleFonts.outfit(
             color: Colors.black54,
             fontSize: 13,
           ),
@@ -350,6 +351,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.outfit(),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           setState(() {
