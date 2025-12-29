@@ -1,18 +1,42 @@
 import 'package:flutter/material.dart';
 import '../core/theme.dart';
 import 'dashboard_screen.dart';
-import 'profile_kelas_screen.dart';
+import 'profile_screen.dart';
 import 'profile_edit_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileKelasScreen extends StatefulWidget {
+  const ProfileKelasScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileKelasScreen> createState() => _ProfileKelasScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  int _bottomNavIndex = 0; // Default or use a provider for state
+class _ProfileKelasScreenState extends State<ProfileKelasScreen> {
+  int _bottomNavIndex = 1; // Kelas Saya active
+
+  // Sample class data
+  final List<Map<String, String>> _classList = [
+    {
+      'name': 'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC',
+      'code': 'D4SM-41-GABI [ARS]',
+      'date': 'Tanggal Mulai Monday, 8 February 2021',
+    },
+    {
+      'name': 'PEMROGRAMAN BERORIENTASI OBJEK',
+      'code': 'D4SM-41-PBO [CSI]',
+      'date': 'Tanggal Mulai Monday, 8 February 2021',
+    },
+    {
+      'name': 'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
+      'code': 'D4SM-41-DAUP [TRM]',
+      'date': 'Tanggal Mulai Monday, 8 February 2021',
+    },
+    {
+      'name': 'BASIS DATA LANJUT',
+      'code': 'D4SM-41-BDL [DBM]',
+      'date': 'Tanggal Mulai Monday, 8 February 2021',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 // 1. Header & Tab Stack
-                // To achieve the floating card effect overlapping header and body
                 SizedBox(
-                  height: 340, // Header height + half of tab card
+                  height: 340,
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -69,17 +92,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width: 110,
                                   height: 110,
                                   padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF8B1010), // Darker red
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF8B1010), // Darker red
                                     shape: BoxShape.circle,
                                   ),
                                   child: ClipOval(
-                                    child: Image.asset(
-                                      'assets/images/user_avatar_default.png', // Fallback or placeholder
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return const Icon(Icons.person, size: 60, color: Colors.white);
-                                      },
+                                    child: Container(
+                                      color: const Color(0xFF8B1010),
+                                      child: const Icon(Icons.person, size: 60, color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -106,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         bottom: 0,
                         left: 24,
                         right: 24,
-                        height: 70, // Height of the floating card
+                        height: 70,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -122,13 +142,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildTabItem('About Me', isActive: true),
-                              _buildTabItem('Kelas', isActive: false, onTap: () {
+                              _buildTabItem('About Me', isActive: false, onTap: () {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ProfileKelasScreen()),
+                                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
                                 );
                               }),
+                              _buildTabItem('Kelas', isActive: true, onTap: () {}),
                               _buildTabItem('Edit Profile', isActive: false, onTap: () {
                                 Navigator.pushReplacement(
                                   context,
@@ -143,110 +163,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                const SizedBox(height: 24),
 
-                // 2. User Information Section
+                // 2. Class List Section
                 Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'Informasi User',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        _buildInfoItem('Email address', 'rdimaswahyu7@mail.com'),
-                        const SizedBox(height: 16),
-                        _buildInfoItem('Program Studi', 'SI TEKNIK INFORMATIKA'),
-                        const SizedBox(height: 16),
-                        _buildInfoItem('Fakultas', 'TEKNIK'),
-                      ],
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 32),
-
-                // 3. Login Activity Section
-                Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'Aktivitas Login',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        _buildActivityItem('First access to site', 'Friday, 18 September 2020, 10:57 AM'),
-                        const SizedBox(height: 16),
-                        _buildActivityItem('Last access to site', 'Friday, 26 February 2021, 10:23 AM (now)'),
-                      ],
-                    ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _classList.map((classItem) => _buildClassItem(classItem)).toList(),
                   ),
                 ),
               ],
-            ),
-          ),
-          
-          // Log Out Button (Floating)
-          Positioned(
-            bottom: 100, // Above bottom nav
-            right: 24,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppTheme.primaryColor,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppTheme.primaryColor.withOpacity(0.4),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    // Handle Logout
-                     Navigator.of(context).popUntil((route) => route.isFirst);
-                  },
-                  borderRadius: BorderRadius.circular(30),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.logout, color: Colors.white, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          'Log Out',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
             ),
           ),
 
@@ -262,7 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildTabItem(String title, {required bool isActive, VoidCallback? onTap}) {
+  Widget _buildTabItem(String title, {required bool isActive, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -289,55 +216,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildInfoItem(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
+  Widget _buildClassItem(Map<String, String> classItem) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Left: Blue oval placeholder
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: const Color(0xFF90CAF9), // Light blue
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(Icons.class_, color: Colors.white, size: 28),
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.black87,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
+          const SizedBox(width: 16),
+          
+          // Right: Class info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  classItem['name'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  classItem['code'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  classItem['date'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildActivityItem(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.black87, // Slightly darker than label for structure
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.black54,
-            fontSize: 13,
-          ),
-        ),
-      ],
-    );
-  }
-
-  // 5. BOTTOM NAVIGATION BAR (Reused)
+  // BOTTOM NAVIGATION BAR
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: const BoxDecoration(
@@ -345,7 +281,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: BottomNavigationBar(
-        backgroundColor: Colors.transparent, // Use Container color
+        backgroundColor: Colors.transparent,
         elevation: 0,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
@@ -355,7 +291,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           setState(() {
             _bottomNavIndex = index;
             if (index == 0) { // Home
-               Navigator.pop(context);
+              Navigator.pushReplacement(
+                context, 
+                MaterialPageRoute(builder: (context) => const DashboardPage()),
+              );
             }
           });
         },

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../core/theme.dart';
 import 'profile_screen.dart';
+import 'notification_screen.dart';
+import 'announcement_detail_screen.dart';
+import 'announcement_list_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -51,7 +54,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           _buildSectionHeader('PENGUMUMAN TERAKHIR'),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const AnnouncementListScreen()),
+                              );
+                            },
                             child: const Text('Lihat Semua', style: TextStyle(color: Colors.blue)),
                           ),
                         ],
@@ -125,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'DANDY CANDRA PRATAMA',
+                    'Dimas',
                     style: TextStyle(
                       color: Colors.white, 
                       fontSize: 18, 
@@ -248,46 +256,54 @@ class _DashboardPageState extends State<DashboardPage> {
 
   // 3. ANNOUNCEMENT CARD
   Widget _buildAnnouncementCard() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Illustration Placeholder
-          Container(
-            height: 120,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFFEEEEEE),
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AnnouncementDetailScreen()),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-            child: Center(
-              child: Icon(Icons.campaign, size: 48, color: Colors.grey[400]),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: const Text(
-              'Maintenance Pra UAS Semester Genap 2020/2021',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black87,
-                height: 1.4,
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Illustration Placeholder
+            Container(
+              height: 120,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xFFEEEEEE),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: Center(
+                child: Icon(Icons.campaign, size: 48, color: Colors.grey[400]),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: const Text(
+                'Maintenance Pra UAS Semester Genap 2020/2021',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                  height: 1.4,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -400,9 +416,17 @@ class _DashboardPageState extends State<DashboardPage> {
         unselectedItemColor: Colors.white60,
         currentIndex: _bottomNavIndex,
         onTap: (index) {
-          setState(() {
-            _bottomNavIndex = index;
-          });
+          if (index == 2) {
+            // Navigate to Notifikasi
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NotificationScreen()),
+            );
+          } else {
+            setState(() {
+              _bottomNavIndex = index;
+            });
+          }
         },
         items: const [
           BottomNavigationBarItem(
