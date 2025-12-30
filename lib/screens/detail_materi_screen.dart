@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms/screens/materi_pembelajaran_screen.dart';
 import 'quiz_detail_screen.dart';
+import 'task_detail_screen.dart';
 
 class DetailMateriScreen extends StatelessWidget {
   final String title;
@@ -344,9 +345,10 @@ class DetailMateriScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.grey[100]!),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withOpacity(0.04),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -357,26 +359,21 @@ class DetailMateriScreen extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TaskDetailScreen()),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Sisi Kiri: Icon & Divider
-                  Column(
-                    children: [
-                      const Icon(Icons.description_outlined, color: Colors.black, size: 28),
-                      const SizedBox(height: 12),
-                      Container(
-                        width: 1,
-                        height: 100,
-                        color: Colors.grey[200],
-                      ),
-                    ],
-                  ),
+                  // Icon
+                  const Icon(Icons.description_outlined, color: Colors.black, size: 28),
                   const SizedBox(width: 20),
-                  // Sisi Kanan: Konten
+                  // Content
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -384,18 +381,20 @@ class DetailMateriScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Tugas 01 – UID Android Mobile Game",
-                              style: GoogleFonts.outfit(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                            Expanded(
+                              child: Text(
+                                "Tugas 01 – UID Android Mobile Game",
+                                style: GoogleFonts.outfit(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                             Icon(
                               Icons.check_circle,
-                              color: Colors.grey[300],
-                              size: 20,
+                              color: Colors.grey[200],
+                              size: 24,
                             ),
                           ],
                         ),
