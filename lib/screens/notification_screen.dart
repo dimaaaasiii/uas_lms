@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
-import 'dashboard_screen.dart';
+import 'dashboard/dashboard_page.dart';
 import 'class_screen.dart';
 
 class NotificationScreen extends StatefulWidget {

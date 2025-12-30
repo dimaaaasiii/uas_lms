@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
-import 'dashboard_screen.dart';
+import 'dashboard/dashboard_page.dart';
 import 'notification_screen.dart';
 import 'course_detail_screen.dart';
 
@@ -81,7 +81,7 @@ class _ClassScreenState extends State<ClassScreen> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
@@ -89,7 +89,7 @@ class _ClassScreenState extends State<ClassScreen> {
           style: GoogleFonts.outfit(
             color: Colors.black,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 18,
           ),
         ),
       ),
@@ -108,25 +108,28 @@ class _ClassScreenState extends State<ClassScreen> {
             child: Container(
               margin: const EdgeInsets.only(bottom: 24),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start, // Align to top
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Thumbnail Image
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(0), // Sharp edges as per design
+                    borderRadius: BorderRadius.circular(12), // Rounded corners
                     child: Image.asset(
                       course['image'],
-                      width: 70,
-                      height: 70,
+                      width: 80,
+                      height: 80,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        width: 70,
-                        height: 70,
-                        color: AppTheme.primaryColor.withOpacity(0.1),
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor.withOpacity(0.05),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: const Icon(Icons.book, color: AppTheme.primaryColor),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 20),
 
                   // Content
                   Expanded(
@@ -137,8 +140,9 @@ class _ClassScreenState extends State<ClassScreen> {
                         Text(
                           course['term'],
                           style: GoogleFonts.outfit(
-                            fontSize: 12,
-                            color: Colors.grey[600],
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[500],
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -148,42 +152,48 @@ class _ClassScreenState extends State<ClassScreen> {
                           style: GoogleFonts.outfit(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.black87,
                             height: 1.2,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                         const SizedBox(height: 2),
-                         // Code
+                         const SizedBox(height: 4),
+                         // Code & Lecturer
                         Text(
-                          '${course['code']} [${course['lecturer'].split(',')[0]}]', // Use just first name part or code
+                          '${course['code']} • ${course['lecturer'].split(',')[0]}',
                            style: GoogleFonts.outfit(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: Colors.grey[600],
                           ),
                            maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 8),
-                        // Progress Bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: LinearProgressIndicator(
-                            value: course['progress'],
-                            minHeight: 6,
-                            backgroundColor: Colors.grey[200],
-                            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFA81111)), // Dark red
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${(course['progress'] * 100).toInt()}% Selesai',
-                           style: GoogleFonts.outfit(
-                            fontSize: 10,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        const SizedBox(height: 12),
+                        // Progress Bar Container
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: LinearProgressIndicator(
+                                  value: course['progress'],
+                                  minHeight: 5,
+                                  backgroundColor: Colors.grey[100],
+                                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFB71C1C)),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              '${(course['progress'] * 100).toInt()}%',
+                               style: GoogleFonts.outfit(
+                                fontSize: 11,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -210,8 +220,8 @@ class _ClassScreenState extends State<ClassScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
-        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: GoogleFonts.outfit(),
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 11),
+        unselectedLabelStyle: GoogleFonts.outfit(fontSize: 11),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           if (index == 0) {
@@ -229,15 +239,18 @@ class _ClassScreenState extends State<ClassScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.class_),
+            icon: Icon(Icons.class_outlined),
+            activeIcon: Icon(Icons.class_),
             label: 'Kelas Saya',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
             label: 'Notifikasi',
           ),
         ],

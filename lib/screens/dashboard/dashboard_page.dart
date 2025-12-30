@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme.dart';
+import '../class_screen.dart';
+import '../notification_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -19,14 +22,14 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           // Content
           SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: 100), // Spacing for BottomNav
+            padding: const EdgeInsets.only(bottom: 100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildHeader(),
                 const SizedBox(height: 24),
                 
-                // Section: TUgas Yang Akan Datang
+                // Section: Tugas Yang Akan Datang
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -51,10 +54,18 @@ class _DashboardPageState extends State<DashboardPage> {
                           _buildSectionHeader('PENGUMUMAN TERAKHIR'),
                           TextButton(
                             onPressed: () {},
-                            child: const Text('Lihat Semua', style: TextStyle(color: Colors.blue)),
+                            child: Text(
+                              'Lihat Semua', 
+                              style: GoogleFonts.outfit(
+                                color: const Color(0xFF1565C0),
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ],
                       ),
+                      const SizedBox(height: 8),
                       _buildAnnouncementCard(),
                     ],
                   ),
@@ -90,37 +101,33 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  // 1. HEADER
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      height: 140, // Increased height to accommodate status bar padding + content
-      padding: const EdgeInsets.fromLTRB(24, 50, 24, 24), // Add top padding for status bar area
+      padding: const EdgeInsets.fromLTRB(24, 60, 24, 30),
       decoration: const BoxDecoration(
         color: AppTheme.primaryColor,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(24),
-          bottomRight: Radius.circular(24),
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center, // Center vertically in the container content area
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min, // Wrap content height
-              children: const [
+              children: [
                 Text(
                   'Hallo,',
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                  style: GoogleFonts.outfit(color: Colors.white70, fontSize: 14),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   'DANDY CANDRA PRATAMA',
-                  style: TextStyle(
+                  style: GoogleFonts.outfit(
                     color: Colors.white, 
-                    fontSize: 18, 
+                    fontSize: 20, 
                     fontWeight: FontWeight.bold,
                   ),
                   maxLines: 1,
@@ -129,25 +136,25 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
           ),
-          
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2), // Darker red effect
+              color: Colors.black.withOpacity(0.15),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
-              children: const [
+              children: [
                 Text(
                   'MAHASISWA',
-                  style: TextStyle(
+                  style: GoogleFonts.outfit(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
                   ),
                 ),
-                SizedBox(width: 8),
-                Icon(Icons.person, color: Colors.white, size: 16),
+                const SizedBox(width: 8),
+                const Icon(Icons.person_pin, color: Colors.white, size: 16),
               ],
             ),
           ),
@@ -157,32 +164,33 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildSectionHeader(String title) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
+    return Text(
+      title,
+      style: GoogleFonts.outfit(
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        color: Colors.black54,
+        letterSpacing: 0.5,
       ),
     );
   }
 
-  // 2. UPCOMING TASK CARD
   Widget _buildUpcomingTaskCard() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF8B1010), // Merah lebih tua (Dark Red)
-        borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(
+          colors: [Color(0xFFB71C1C), Color(0xFF8B1010)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.red.withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -191,36 +199,35 @@ class _DashboardPageState extends State<DashboardPage> {
           Text(
             'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 12,
+            style: GoogleFonts.outfit(
+              color: Colors.white.withOpacity(0.8),
+              fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'Tugas 01 - UID Android Mobile Game',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
-          // Divider tipis
-          Container(height: 1, width: 60, color: Colors.white24),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
+          Container(height: 1, width: 40, color: Colors.white24),
+          const SizedBox(height: 20),
           Text(
             'Waktu Pengumpulan',
-            style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 12),
+            style: GoogleFonts.outfit(color: Colors.white70, fontSize: 11),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             'Jumat 26 Februari, 23:59 WIB',
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 13,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -229,44 +236,42 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  // 3. ANNOUNCEMENT CARD
   Widget _buildAnnouncementCard() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 15,
+            offset: const Offset(0, 5),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Illustration Placeholder
           Container(
-            height: 120,
+            height: 140,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFFEEEEEE),
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Center(
-              child: Icon(Icons.campaign, size: 48, color: Colors.grey[400]),
+              child: Icon(Icons.campaign_outlined, size: 48, color: Colors.grey[300]),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: const Text(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
               'Maintenance Pra UAS Semester Genap 2020/2021',
-              style: TextStyle(
+              style: GoogleFonts.outfit(
                 fontSize: 14,
+                fontWeight: FontWeight.w500,
                 color: Colors.black87,
-                height: 1.4,
+                height: 1.5,
               ),
             ),
           ),
@@ -275,7 +280,6 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  // 4. CLASS PROGRESS SECTION
   Widget _buildClassProgressList() {
     return ListView.builder(
       shrinkWrap: true,
@@ -285,76 +289,69 @@ class _DashboardPageState extends State<DashboardPage> {
       itemBuilder: (context, index) {
         return Container(
           margin: const EdgeInsets.only(bottom: 16),
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.08),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
+                color: Colors.black.withOpacity(0.03),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Row(
             children: [
-              // Thumbnail
               Container(
-                width: 60,
-                height: 60,
+                width: 65,
+                height: 65,
                 decoration: BoxDecoration(
-                  color: Colors.red[50],
-                  borderRadius: BorderRadius.circular(8),
+                  color: const Color(0xFFFFF5F5),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.book, color: AppTheme.primaryColor),
+                child: const Icon(Icons.menu_book_rounded, color: AppTheme.primaryColor, size: 28),
               ),
               const SizedBox(width: 16),
-              
-              // Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
                           '2021/2',
-                          style: TextStyle(fontSize: 10, color: Colors.grey),
+                          style: GoogleFonts.outfit(fontSize: 11, color: Colors.grey),
                         ),
                         Text(
                           '89% Selesai',
-                          style: TextStyle(
-                            fontSize: 10, 
+                          style: GoogleFonts.outfit(
+                            fontSize: 11, 
                             color: AppTheme.primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
+                    const SizedBox(height: 6),
+                    Text(
                       'PEMROGRAMAN BERORIENTASI OBJEK',
-                      style: TextStyle(
-                        fontSize: 12,
+                      style: GoogleFonts.outfit(
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black87,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
-                      'CSI322 • Dosen Pengampu',
-                      style: TextStyle(fontSize: 10, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.circular(4),
                       child: LinearProgressIndicator(
                         value: 0.89,
-                        minHeight: 4,
-                        backgroundColor: Colors.grey[200],
+                        minHeight: 5,
+                        backgroundColor: Colors.grey[100],
                         valueColor: const AlwaysStoppedAnimation<Color>(AppTheme.primaryColor),
                       ),
                     ),
@@ -368,7 +365,6 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  // 5. BOTTOM NAVIGATION BAR
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: const BoxDecoration(
@@ -376,28 +372,41 @@ class _DashboardPageState extends State<DashboardPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: BottomNavigationBar(
-        backgroundColor: Colors.transparent, // Use Container color
+        backgroundColor: Colors.transparent,
         elevation: 0,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 11),
+        unselectedLabelStyle: GoogleFonts.outfit(fontSize: 11),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
-          setState(() {
-            _bottomNavIndex = index;
-          });
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ClassScreen()),
+            );
+          } else if (index == 2) {
+             Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NotificationScreen()),
+            );
+          }
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.class_),
+            icon: Icon(Icons.class_outlined),
+            activeIcon: Icon(Icons.class_),
             label: 'Kelas Saya',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
             label: 'Notifikasi',
           ),
         ],

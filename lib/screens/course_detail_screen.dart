@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/theme.dart';
-import 'dashboard_screen.dart';
+import 'dashboard/dashboard_page.dart';
 import 'class_screen.dart';
 import 'notification_screen.dart';
+import 'detail_materi_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -85,19 +86,19 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color(0xFFF2F2F2), // Light Grey Background
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: AppTheme.primaryColor, // Maroon
+          backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, color: Colors.black, size: 20),
             onPressed: () => Navigator.pop(context),
           ),
           title: Text(
-            'DESAIN ANTARMUKA & PENGALAMAN\nPENGGUNA D4SM-42-03 [ADY]',
+            'Sistem Cerdas',
             textAlign: TextAlign.left,
             style: GoogleFonts.outfit(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -107,13 +108,19 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48),
             child: Container(
-              color: Colors.white,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(color: Colors.black12, width: 0.5),
+                ),
+              ),
               child: TabBar(
                 indicatorColor: Colors.black,
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
-                labelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
-                unselectedLabelStyle: GoogleFonts.outfit(),
+                indicatorWeight: 1.5,
+                labelStyle: GoogleFonts.outfit(fontWeight: FontWeight.w600, fontSize: 14),
+                unselectedLabelStyle: GoogleFonts.outfit(fontSize: 14),
                 tabs: const [
                   Tab(text: 'Materi'),
                   Tab(text: 'Tugas Dan Kuis'),
@@ -125,22 +132,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         body: TabBarView(
           children: [
             // Tab 1: Materi
-            ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              itemCount: _materials.length,
-              itemBuilder: (context, index) {
-                return _buildMaterialCard(_materials[index]);
-              },
-            ),
-            // Tab 2: Tugas Dan Kuis (Empty/Placeholder)
+            _buildMateriTab(),
             // Tab 2: Tugas Dan Kuis
-            ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              itemCount: _tasks.length,
-              itemBuilder: (context, index) {
-                return _buildTaskCard(_tasks[index]);
-              },
-            ),
+            _buildTugasTab(),
           ],
         ),
         bottomNavigationBar: _buildBottomNavigationBar(),
@@ -148,71 +142,100 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
+  Widget _buildMateriTab() {
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      itemCount: _materials.length,
+      itemBuilder: (context, index) {
+        return _buildMaterialCard(_materials[index]);
+      },
+    );
+  }
+
+  Widget _buildTugasTab() {
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      itemCount: _tasks.length,
+      itemBuilder: (context, index) {
+        return _buildTaskCard(_tasks[index]);
+      },
+    );
+  }
+
   Widget _buildMaterialCard(Map<String, dynamic> data) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailMateriScreen(
+              title: data['title'],
+            ),
           ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Top Row: Chip & Status
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    data['meeting'],
-                    style: GoogleFonts.outfit(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.check_circle,
-                  color: data['isCompleted'] ? Colors.green : Colors.grey[300],
-                  size: 20,
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            // Title
-            Text(
-              data['title'],
-              style: GoogleFonts.outfit(
-                color: Colors.black,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 8),
-            // Description
-            Text(
-              data['description'],
-              style: GoogleFonts.outfit(
-                color: Colors.grey,
-                fontSize: 12,
-              ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
             ),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE3F2FD),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      data['meeting'],
+                      style: GoogleFonts.outfit(
+                        color: const Color(0xFF1976D2),
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.check_circle,
+                    color: data['isCompleted'] ? const Color(0xFF4CAF50) : Colors.grey[200],
+                    size: 18,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                data['title'],
+                style: GoogleFonts.outfit(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                data['description'],
+                style: GoogleFonts.outfit(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -220,38 +243,37 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
 
   Widget _buildTaskCard(Map<String, dynamic> data) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Row: Chip & Status
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color:  data['type'] == 'Kuis' ? Colors.orange : AppTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(20),
+                    color: data['type'] == 'Kuis' ? const Color(0xFFFFF3E0) : const Color(0xFFFFEBEE),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    data['type'],
+                    data['type'].toUpperCase(),
                     style: GoogleFonts.outfit(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
+                      color: data['type'] == 'Kuis' ? Colors.orange[800] : const Color(0xFFD32F2F),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -261,29 +283,33 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                   style: GoogleFonts.outfit(
                     color: data['statusColor'],
                     fontWeight: FontWeight.bold,
-                    fontSize: 12,
+                    fontSize: 11,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            // Title
             Text(
               data['title'],
               style: GoogleFonts.outfit(
-                color: Colors.black,
-                fontSize: 15,
+                color: Colors.black87,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
-            // Description
-            Text(
-              'Deadline: ${data['deadline']}',
-              style: GoogleFonts.outfit(
-                color: Colors.grey,
-                fontSize: 12,
-              ),
+            Row(
+              children: [
+                const Icon(Icons.access_time_rounded, color: Colors.grey, size: 14),
+                const SizedBox(width: 6),
+                Text(
+                  'Deadline: ${data['deadline']}',
+                  style: GoogleFonts.outfit(
+                    color: Colors.grey[600],
+                    fontSize: 11,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -294,20 +320,17 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: const BoxDecoration(
-        color: AppTheme.primaryColor, // Maroon Background as requested
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(0), // Requirement didn't specify radius, assuming standard flat or custom
-          topRight: Radius.circular(0),
-        ),
+        color: AppTheme.primaryColor,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: BottomNavigationBar(
-        backgroundColor: Colors.transparent, // Maroon from container
+        backgroundColor: Colors.transparent,
         elevation: 0,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
-        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: GoogleFonts.outfit(),
+        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 11),
+        unselectedLabelStyle: GoogleFonts.outfit(fontSize: 11),
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           if (index == 0) {
@@ -325,15 +348,18 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.class_),
+            icon: Icon(Icons.class_outlined),
+            activeIcon: Icon(Icons.class_),
             label: 'Kelas Saya',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
             label: 'Notifikasi',
           ),
         ],
