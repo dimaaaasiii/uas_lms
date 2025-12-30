@@ -43,7 +43,7 @@ class QuizDetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(32, 32, 32, 24),
               child: Text(
-                "Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan.\n\nKerjakan sebelum hari Jum'at, 26 Februari 2021 jam 23:59 WIB.",
+                "Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan.\n\nKerjakan sebelum hari Rabu, 31 Desember 2025 jam 23:59 WIB.",
                 style: GoogleFonts.outfit(
                   fontSize: 14,
                   height: 1.6,
@@ -69,7 +69,7 @@ class QuizDetailScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  _buildInfoText("Kuis Akan di tutup pada Jumat, 26 February 2021, 11:59 PM"),
+                  _buildInfoText("Kuis Akan di tutup pada Kamis, 01 Januari 2025, 12:00 PM"),
                   const SizedBox(height: 8),
                   _buildInfoText("Batas Waktu: 15 menit"),
                   const SizedBox(height: 8),
@@ -145,7 +145,7 @@ class QuizDetailScreen extends StatelessWidget {
                       children: [
                         Text("Selesai", style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w500)),
                         const SizedBox(height: 4),
-                        Text("Dikirim Pada Kamis, 25 Februari 2021, 10:40", style: GoogleFonts.outfit(fontSize: 10, color: Colors.grey)),
+                        Text("Dikirim Pada Kamis, 01 Januari 2025, 10:40", style: GoogleFonts.outfit(fontSize: 10, color: Colors.grey)),
                       ],
                     ),
                   ),

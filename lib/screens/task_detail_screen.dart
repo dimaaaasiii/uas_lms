@@ -67,7 +67,7 @@ class TaskDetailScreen extends StatelessWidget {
             _buildStatusRow('Sisa Waktu', 'Tugas sudah di kirim 4 Hari 6 Jam Sebelum nya', lightGreyRow),
             
             // FILE ROW
-            _buildFileRow('File Tugas', 'Dandy Candra Pratama_7708170114.pdf', Colors.white),
+            _buildFileRow('File Tugas', 'Dimas Wahyu Romadhoni_7708170114.pdf', Colors.white),
 
             const SizedBox(height: 60),
 
@@ -87,7 +87,7 @@ class TaskDetailScreen extends StatelessWidget {
       'Desain bisa dibuat menggunakan aplikasi khusus desain atau secara manual dengan tetap menjunjung kerapihan dan kejelasan setiap elemen dalam desain.',
       'Berikan identitas aplikasi game yang dibuat, seperti Nama Game, Genre, dan Platform. Serta berikan penjelasan pada setiap elemen pada desain, seperti gambar, teks, tombol, icon, dan lain-lain.',
       'File dikumpulkan dalam format .PDF dengan size maksimal 5MB.',
-      'Tugas dikumpulkan paling lambat hari Jum’at, 26 Februari 2021 jam 23:59 WIB (akan tertutup otomatis) dan akan dipresentasikan pada pertemuan selanjutnya via Zoom Meeting.',
+      'Tugas dikumpulkan paling lambat hari rabu, 31 Desember 2025 jam 23:59 WIB (akan tertutup otomatis) dan akan dipresentasikan pada pertemuan selanjutnya via Zoom Meeting.',
     ];
 
     return Column(

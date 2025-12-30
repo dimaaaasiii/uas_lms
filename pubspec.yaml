@@ -67,6 +67,7 @@ flutter:
     - assets/images/class_pancasila.png
     - assets/images/class_code.png
     - assets/images/user_avatar_default.png
+    - assets/images/user_profile.jpg
     - assets/images/empty_state_tugas.png
     - assets/loguUAS-removebg-preview.png
 

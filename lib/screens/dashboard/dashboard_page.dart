@@ -129,6 +129,32 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       child: Row(
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+            child: Container(
+              width: 55,
+              height: 55,
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.2),
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/user_profile.jpg',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => 
+                      const Icon(Icons.person, color: Colors.white, size: 30),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
           Expanded(
             child: GestureDetector(
               onTap: () {
@@ -386,18 +412,18 @@ class _DashboardPageState extends State<DashboardPage> {
     final List<Map<String, dynamic>> progresses = [
       {
         'title': 'Seminar Tugas Akhir',
-        'term': '2021/2',
+        'term': '2024/2025',
         'progress': 0.89,
       },
       {
         'title': 'SISTEM CERDAS',
-        'term': '2021/2',
+        'term': '2024/2025',
         'progress': 0.75,
       },
       {
         'title': 'MOBILE PROGRAMMING LANJUT',
-        'term': '2021/2',
-        'progress': 0.45,
+        'term': '2024/2025',
+        'progress': 0.90,
       },
     ];
 

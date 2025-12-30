@@ -92,7 +92,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   ),
                                   child: ClipOval(
                                     child: Image.asset(
-                                      'assets/images/user_avatar_default.png', 
+                                      'assets/images/user_profile.jpg', 
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
                                         return const Icon(Icons.person, size: 60, color: Colors.white);

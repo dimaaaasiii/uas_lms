@@ -147,13 +147,13 @@ class QuizReviewScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _buildSummaryRow("Di Mulai Pada", "Kamis 25 Februari 2021 10:25"),
+          _buildSummaryRow("Di Mulai Pada", "Kamis 01 Januari 2025 10:25"),
           const SizedBox(height: 12),
           _buildSummaryRow("Status", "Selesai"),
           const SizedBox(height: 12),
-          _buildSummaryRow("Selesai Pada", "Kamis 25 Februari 2021 10:40"),
+          _buildSummaryRow("Selesai Pada", "Kamis 01 Januari 2025 10:30"),
           const SizedBox(height: 12),
-          _buildSummaryRow("Waktu Penyelesaian", "13 Menit 22 Detik"),
+          _buildSummaryRow("Waktu Penyelesaian", "05 Menit"),
           const SizedBox(height: 12),
           _buildSummaryRow("Nilai", "0 / 100", isLast: true),
         ],

@@ -321,7 +321,7 @@ class DetailMateriScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan. Kerjakan sebelum hari Jum'at, 26 Februari 2021 jam 23:59 WIB.",
+                          "Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai pertama komponen kuis. Jangan lupa klik tombol Submit Answer setelah menjawab seluruh pertanyaan. Kerjakan sebelum hari Jum'at, 31 Desember 2025 jam 23:59 WIB.",
                           style: GoogleFonts.outfit(
                             fontSize: 12,
                             color: Colors.grey[600],
@@ -383,7 +383,7 @@ class DetailMateriScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Tugas 01 – UID Android Mobile Game",
+                                "Tugas 01 – Represensi Pengetahuan",
                                 style: GoogleFonts.outfit(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -399,7 +399,7 @@ class DetailMateriScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
-                        _buildBulletItem("1", "Buatlah desain tampilan (antarmuka) pada aplikasi mobile game FPS (First Person Shooter) yang akan menjadi tugas pada mata kuliah Pemrograman Aplikasi Permainan."),
+                        _buildBulletItem("1", "Buatlah desain tampilan Represensi Pengetahuanyang akan menjadi tugas."),
                         const SizedBox(height: 8),
                         _buildBulletItem("2", "Desain yang dibuat harus melingkupi seluruh tampilan pada aplikasi/game, dari pertama kali aplikasi dibuka hingga selesai."),
                       ],

@@ -22,7 +22,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'MIFTAHUL WALID, S.Kom., MT',
       'progress': 0.89,
       'image': 'assets/images/class_code.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
     {
@@ -31,7 +31,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'Dr. HOZAIRI, S.ST., M.T',
       'progress': 0.86,
       'image': 'assets/images/class_uiux.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
     {
@@ -40,7 +40,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'HOIRIYAH, S.Kom., M.Kom',
       'progress': 0.90,
       'image': 'assets/images/class_code.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
     {
@@ -49,7 +49,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'ROFIUDDIN, M. Kom',
       'progress': 0.90,
       'image': 'assets/images/class_code.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
     {
@@ -58,7 +58,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'ARY ISWAHYUDI, S.Si.,M.T',
       'progress': 0.90,
       'image': 'assets/images/class_uiux.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
     {
@@ -67,7 +67,7 @@ class _ClassScreenState extends State<ClassScreen> {
       'lecturer': 'ROFIUDDIN, M. Kom',
       'progress': 0.90,
       'image': 'assets/images/class_pancasila.png',
-      'term': '2021/2',
+      'term': '2024/2025',
       'status': 'Approved',
     },
   ];
@@ -110,27 +110,6 @@ class _ClassScreenState extends State<ClassScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Thumbnail Image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12), // Rounded corners
-                    child: Image.asset(
-                      course['image'],
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(Icons.book, color: AppTheme.primaryColor),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-
                   // Content
                   Expanded(
                     child: Column(
