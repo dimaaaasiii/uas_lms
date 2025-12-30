@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lms/screens/materi_pembelajaran_screen.dart';
+import 'quiz_detail_screen.dart';
 
 class DetailMateriScreen extends StatelessWidget {
   final String title;
@@ -7,8 +9,15 @@ class DetailMateriScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Determine content based on title
+    bool isPengantar = title.contains("Pengantar");
+    
+    String description = isPengantar
+        ? "Antarmuka yang dibangun harus memperhatikan prinsip-prinsip desain yang ada. Hal ini diharapkan agar antarmuka yang dibangun bukan hanya menarik secara visual tetapi dengan memperhatikan kaidah-kaidah prinsip desain diharapkan akan mendukung pengguna dalam menggunakan produk secara baik. Pelajaran mengenai prinsip UID ini sudah pernah diajarkan dalam mata kuliah Implementasi Desain Antarmuka Pengguna tetap pada matakuliah ini akan direview kembali sehingga dapat menjadi bekal saat memasukki materi mengenai User Experience"
+        : "Konsep dasar User Interface Design akan dipelajari bagaimana membangun sebuah Interaction Design pada antarmuka. Interaction ini sangat penting untuk aplikasi berkomunikasi dengan pengguna. Lalu dipelajari juga poin-poin penting pada interaction design seperti visibility, feedback, limitation, consistency dan affordance. Dan terakhir materi conceptual dan perceptual design interaction akan memberikan gambaran bagaimana bentuk dari Interaction.";
+
     return DefaultTabController(
-      initialIndex: 1, // "Tugas dan Kuis" tab aktif
+      initialIndex: 0, // "Lampiran Materi" tab aktif sesuai screenshot
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -42,12 +51,16 @@ class DetailMateriScreen extends StatelessWidget {
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
-                    Text(
-                      title,
-                      style: GoogleFonts.outfit(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 48),
+                      child: Text(
+                        title.replaceFirst(RegExp(r'^\d+\s*-\s*'), ''), // Strip numeric prefix if any
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.outfit(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
@@ -70,11 +83,11 @@ class DetailMateriScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "Konsep dasar User Interface Design akan dipelajari bagaimana membangun sebuah Interaction Design pada antarmuka. Interaction ini sangat penting untuk aplikasi berkomunikasi dengan pengguna. Lalu dipelajari juga poin-poin penting pada interaction design seperti visibility, feedback, limitation, consistency dan affordance. Dan terakhir materi conceptual dan perceptual design interaction akan memberikan gambaran bagaimana bentuk dari Interaction.",
+                      description,
                       textAlign: TextAlign.left,
                       style: GoogleFonts.outfit(
                         fontSize: 13,
-                        color: Colors.grey[700],
+                        color: Colors.grey[800],
                         height: 1.6,
                       ),
                     ),
@@ -85,16 +98,14 @@ class DetailMateriScreen extends StatelessWidget {
               // Tab Navigation
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    bottom: BorderSide(color: Colors.black12, width: 0.5),
-                  ),
+                  color: Color(0xFFF5F5F5), // Light grey background like in screenshot
                 ),
                 child: TabBar(
                   labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey[400],
+                  unselectedLabelColor: Colors.black54,
                   indicatorColor: Colors.black,
-                  indicatorWeight: 1.5,
+                  indicatorWeight: 3,
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 24),
                   labelStyle: GoogleFonts.outfit(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
@@ -114,8 +125,8 @@ class DetailMateriScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildMateriList(),
-                    _buildTugasDanKuisList(),
+                    _buildMateriList(context),
+                    isPengantar ? _buildEmptyTugasList() : _buildTugasDanKuisList(context),
                   ],
                 ),
               ),
@@ -126,26 +137,122 @@ class DetailMateriScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMateriList() {
-    return const Center(
-      child: Text("Lampiran Materi akan tampil di sini"),
-    );
-  }
-
-  Widget _buildTugasDanKuisList() {
+  Widget _buildMateriList(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       children: [
-        // CARD 1 : QUIZ
-        _buildQuizCard(),
-        const SizedBox(height: 16),
-        // CARD 2 : TUGAS
-        _buildTugasCard(),
+        _buildResourceCard("Zoom Meeting Syncronous", Icons.link, isDone: true),
+        const SizedBox(height: 12),
+        _buildResourceCard(
+          "Pengantar User Interface Design", 
+          Icons.description_outlined, 
+          isDone: false,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MateriPembelajaranScreen()),
+            );
+          },
+        ),
+        const SizedBox(height: 12),
+        _buildResourceCard("Empat Teori Dasar Antarmuka Pengguna", Icons.description_outlined, isDone: false),
+        const SizedBox(height: 12),
+        _buildResourceCard("Empat Teori Dasar Antarmuka Pengguna", Icons.description_outlined, isDone: true),
+        const SizedBox(height: 12),
+        _buildResourceCard("User Interface Design for Beginner", Icons.videocam_outlined, isDone: true),
+        const SizedBox(height: 12),
+        _buildResourceCard("20 Prinsip Desain", Icons.link, isDone: true),
+        const SizedBox(height: 12),
+        _buildResourceCard("Best Practice UI Design", Icons.link, isDone: true),
       ],
     );
   }
 
-  Widget _buildQuizCard() {
+  Widget _buildResourceCard(String title, IconData icon, {required bool isDone, VoidCallback? onTap}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Row(
+                children: [
+                  Icon(icon, color: Colors.black, size: 24),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: GoogleFonts.outfit(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.check_circle,
+                    color: isDone ? const Color(0xFF4CAF50) : Colors.grey[300],
+                    size: 24,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyTugasList() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/empty_state_tugas.png',
+          width: 250,
+          errorBuilder: (context, error, stackTrace) => const Icon(Icons.assignment_late, size: 100, color: Colors.grey),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          "Tidak Ada Tugas Dan Kuis Hari Ini",
+          style: GoogleFonts.outfit(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTugasDanKuisList(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      children: [
+        // CARD 1 : QUIZ
+        _buildQuizCard(context),
+        const SizedBox(height: 16),
+        // CARD 2 : TUGAS
+        _buildTugasCard(context),
+      ],
+    );
+  }
+
+  Widget _buildQuizCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -163,7 +270,13 @@ class DetailMateriScreen extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              print("Quiz card tapped! Navigating to QuizDetailScreen...");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuizDetailScreen()),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -226,7 +339,7 @@ class DetailMateriScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTugasCard() {
+  Widget _buildTugasCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

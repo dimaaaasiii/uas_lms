@@ -125,13 +125,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               _buildTabItem('About Me', isActive: true),
                               _buildTabItem('Kelas', isActive: false, onTap: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => const ClassScreen()),
                                 );
                               }),
                               _buildTabItem('Edit Profile', isActive: false, onTap: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => const ProfileEditScreen()),
                                 );
